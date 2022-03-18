@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Julian Kuipers">
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    <link rel="shortcut icon" href="../assets/favicon.ico">
+
+    <title>XML-generator E-Factuur | Documentatie</title>
+
+    <link rel="canonical" href="">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <!-- Custom styles for this template -->
+    <link href="../css/main.css" rel="stylesheet">
+
+    <!--Custom JS-->
+    <script src="../js/changeView.js"></script>
+    <script src="../js/filesaver.js"></script>
+    <script src="../js/createXML.js"></script>
+    <script src="../js/gen.js"></script>
+    <script src="../js/lineItems.js"></script>
+    <script src="../js/autoCalc.js"></script>
+
+    <!--Views.js-->
+
+    <!--Utils.js-->
+    <script src="../js/utils/format.utility.js"></script>
+    <script src="../js/utils/dateCalculation.utility.js"></script>
+
+  </head>
+
+  <body class="text-center">
+
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">XML-generator E-Factuur</h3>
+          <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link" href="../index.html">XML-generator</a>
+            <a class="nav-link active" href="documentatie.html">Uitleg</a>
+          </nav>
+        </div>
+      </header>
+
+      <main role="main" class="inner cover">
+        <!--INTRO-->
+        <div id="intro">
+          <h1 class="cover-heading">XML-generator voor e-facturen</h1>
+          <p class="lead">Hieronder vind je per veld de uitleg voor het invullen van het formulier.</p>
+        </div>
+
+        <div id="table">
+            <table class="table table-striped table-hover text-left">
+                <thead class="thead bg-primary">
+                  <tr>
+                    <th scope="col">Veld</th>
+                    <th scope="col">Beschrijving</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Bestelreferentie</th>
+                    <td>Het <i>Purchase Order</i> nummer ofwel het bestelnummer. Dit is een referentie naar een bestelling waarvoor deze factuur ingediend wordt.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Deelfactuur</th>
+                    <td>Voor één bestelling kunnen meerdere facturen worden verzonden. Geef een unieke waarde op die deze deelfactuur kenmerkt.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">IBAN</th>
+                    <td>Het IBAN-nummer waar de betaling van deze factuur naartoe dient te worden gezonden.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Percentage Belasting</th>
+                    <td>Het percentage dat aan belasting op de factuur moet komen te staan. Dit kan variëren van 0%, 6%, 9% of bijvoorbeeld 21%.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Factuurbedrag exclusief belasting</th>
+                    <td>Het totaalbedrag van de factuur exclusief de belasting.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Totaal bedrag belasting op de factuur</th>
+                    <td>Het totaalbedrag aan belasting op de factuur.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Totaal factuurbedrag inclusief belasting</th>
+                    <td>Het totaalbedrag van de factuur inclusief belasting.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Aantal posities factuur</th>
+                    <td>Het aantal posities op de factuur. Dit zijn er 1 of meer.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Naam/omschrijving</th>
+                    <td>De naam of omschrijving van de positie.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Aantal items</th>
+                    <td>Het aantal items van die positie die gefactureerd wordt.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Stuksprijs exclusief belasting</th>
+                    <td>Stuksprijs per item exclusief belasting.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Totaal bedrag exclusief belasting van dit item</th>
+                    <td>Het totaalbedrag van dit item zonder belasting. Dit is dus stuksprijs EXCLUSIF BTW x het aantal items.</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Genereer-knop</th>
+                    <td>Genereer de factuur.</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+
+        <!--UITLEG-->
+        
+      </main>
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>XML-generator voor e-facturen, door <a target="_blank" href="https://www.linkedin.com/in/juliankuipers/">@juliankuipers</a>. Voor vragen of opmerkingen, ga naar <a target="_blank" href="https://github.com/JulianKuipers/e-factuur-xml-generator">GitHub</a> of mail naar <a target="_blank" href="mailto:info@juliankuipers.com">info@juliankuipers.com</a> .</p>
+        </div>
+      </footer>
+    </div>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

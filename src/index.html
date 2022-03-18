@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Julian Kuipers">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="shortcut icon" href="assets/favicon.ico">
+
+    <title>XML-generator E-Factuur | Home</title>
+
+    <link rel="canonical" href="">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <!-- Custom styles for this template -->
+    <link href="css/main.css" rel="stylesheet">
+
+    <!--Dependencies.js-->
+    <script src="js/dependencies/fileSaver.dependency.js"></script>
+
+    <!--Controllers.js-->
+    <script src="js/controllers/main.controller.js"></script>
+    <script src="js/controllers/taxCalculation.controller.js"></script>
+    <script src="js/controllers/createXML.controller.js"></script>
+    <script src="js/controllers/lineItems.controller.js"></script>
+
+    <!--View.js-->
+    <script src="js/views/main.view.js"></script>
+
+    <!--Utility.js-->
+    <script src="js/utils/format.utility.js"></script>
+    <script src="js/utils/dateCalculation.utility.js"></script>
+    <script src="js/utils/calculations.utility.js"></script>
+    <script src="js/utils/createXML.utility.js"></script>
+
+    <!--Classes.js-->
+    <script src="js/classes/Sanitizer.class.js"></script>
+
+  </head>
+
+  <body class="text-center">
+
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">XML-generator E-Factuur</h3>
+          <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link active" href="index.html">XML-generator</a>
+            <a class="nav-link" href="docs/documentatie.html">Uitleg</a>
+          </nav>
+        </div>
+      </header>
+
+      <main role="main" class="inner cover">
+        <!--INTRO-->
+        <div id="intro">
+          <h1 class="cover-heading">XML-generator voor e-facturen</h1>
+          <p class="lead">Vul onderstaand formulier in en laat een XML bestand genereren dat gebruikt kan worden tijdens het testen. Alle bedragen zijn in euro's!</p>
+        </div>
+
+        <br/>
+        <br/>
+
+        <!--FORMULIER-->
+        <form class="text-left">
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="standaard">Factuurstandaard</label>
+              <select type="text" class="form-control" id="standaard">
+                <option>UBL-OHNL</option>
+                <option>NLCIUS</option>
+              </select>
+            </div>
+            <div class="col-md-8">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="invoiceType">Factuurtype</label>
+              <select type="text" class="form-control" id="invoiceType">
+                <option>Factuur</option>
+                <option>Creditnota</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="form-group col-md-6">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="autoCalcBox" checked>
+                <label class="form-check-label" for="autoCalcBox">
+                  Bereken bedragen automatisch
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="taxIncludedBox" checked>
+                <label class="form-check-label" for="taxIncludedBox">
+                  Reken met bedragen inclusief belasting
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-8">
+              <label for="poNumber">Bestelreferentie</label>
+              <input type="text" class="form-control" id="poNumber" aria-describedby="poHelp" placeholder="PO-nummer">
+              <small id="poHelp" class="form-text text-muted">Het nummer van de bestelling.</small>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="invoiceCount">Deelfactuur</label>
+              <input type="text" class="form-control" id="invoiceCount" aria-describedby="countHelp" placeholder="Deelfactuur">
+              <small id="countHelp" class="form-text text-muted">Het nummer van de deelfactuur, 01 als eerste (en enige) factuur, 02, 03, etc...</small>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="iban">IBAN</label>
+              <input type="text" class="form-control" id="iban"  placeholder="IBAN">
+            </div>
+          </div>
+
+          <div class="form-row" id="taxDiv">
+            <div class="form-group col-md-6">
+              <label for="taxPercentage">Percentage belasting</label>
+              <input type="number" class="form-control" id="taxPercentage" placeholder="0.00" min="0.00">
+            </div>
+          </div>
+
+          <div class="form-row" id="absoluteAmountDiv"></div>
+
+          <div class="form-row">
+            <div class="form-group col-md-2">
+              <label for="count">Aantal posities factuur</label>
+              <input type="number" class="form-control" id="count" min="1" value="1">
+            </div>
+          </div>
+
+          <br/>
+          <h5>Posities</h5>
+          <div id="invoiceLines">
+            <div id="item1">
+              <h6>Positie 1</h6>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="nameItem1">Naam/omschrijving</label>
+                  <input type="text" class="form-control" id="nameItem1" placeholder="Naam/omschrijving van het item">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-2">
+                  <label for="quantityItem1">Aantal items</label>
+                  <input type="number" class="form-control" id="quantityItem1" min="1" value="1" aria-describedby="quantityHelp">
+                  <small id="quantityHelp" class="form-text text-muted">Aantal items</small>
+                </div>
+                <div class="form-group col-md-5">
+                  <label for="priceItem1">Stuksprijs exclusief belasting</label>
+                  <input type="number" class="form-control" id="priceItem1" placeholder="0.00">
+                </div>
+                <div class="form-group col-md-5" id="totalAmountDiv1"></div>
+              </div>
+            </div>
+          </div>
+          <button onclick="main()" class="btn btn-primary" type="button">Genereer</button>
+        </form>
+      </main>
+
+      <br/>
+      <br/>
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>XML-generator voor e-facturen, door <a target="_blank" href="https://www.linkedin.com/in/juliankuipers/">@juliankuipers</a>. Voor vragen of opmerkingen, ga naar <a target="_blank" href="https://github.com/JulianKuipers/e-factuur-xml-generator">GitHub</a> of mail naar <a target="_blank" href="mailto:info@juliankuipers.com">info@juliankuipers.com</a> .</p>
+        </div>
+      </footer>
+    </div>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+
+  <script>
+    $(document).ready(function() {
+      initialize();
+    });
+
+    $("form").keypress(function(e) {
+      //Enter key
+      if (e.which == 13) {
+        return false;
+      }
+    });
+  </script>
+</html>
