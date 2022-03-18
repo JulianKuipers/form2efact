@@ -84,7 +84,7 @@ function changeLineItems() {
     priceItem = document.createElement("input");
     priceItem.classList.add("form-control");
     priceItem.setAttribute("type", "text");
-    priceItem.setAttribute("placeholder", "0.00");
+    priceItem.setAttribute("value", "0,00");
     priceItem.id = `priceItem${index}`;
 
     if (!autoCalcBox.checked) {
@@ -95,7 +95,7 @@ function changeLineItems() {
       taxInclusiveAmountItem = document.createElement("input");
       taxInclusiveAmountItem.classList.add("form-control");
       taxInclusiveAmountItem.setAttribute("type", "text");
-      taxInclusiveAmountItem.setAttribute("placeholder", "0.00");
+      taxInclusiveAmountItem.setAttribute("value", "0,00");
       taxInclusiveAmountItem.id = `taxInclusiveAmountItem${index}`;
 
       formGroupRight.appendChild(taxInclusiveAmountLabel);

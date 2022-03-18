@@ -72,7 +72,7 @@ function _createTaxDiv(placeholder) {
     input.classList.add("form-control");
     input.id = "taxPercentage";
     input.setAttribute("type", "number");
-    input.setAttribute("placeholder", "0.00");
+    input.setAttribute("value", "0.00");
     input.setAttribute("min", "0.00");
 
     div.appendChild(label);
@@ -102,7 +102,7 @@ function _createAbsoluteAmountsDiv(placeholder) {
     taxableAmountItem.classList.add("form-control");
     taxableAmountItem.setAttribute("type", "number");
     taxableAmountItem.id = "taxableAmount";
-    taxableAmountItem.setAttribute("placeholder", "0.00");
+    taxableAmountItem.setAttribute("value", "0.00");
 
     var taxAmountItem, taxAmountLabel;
     taxAmountLabel = document.createElement("label");
@@ -111,7 +111,7 @@ function _createAbsoluteAmountsDiv(placeholder) {
     taxAmountItem = document.createElement("input");
     taxAmountItem.classList.add("form-control");
     taxAmountItem.setAttribute("type", "number");
-    taxAmountItem.setAttribute("placeholder", "0.00");
+    taxAmountItem.setAttribute("value", "0.00");
     taxAmountItem.id = "taxAmount";
 
     var taxInclusiveAmountItem, taxInclusiveAmountLabel;
@@ -121,7 +121,7 @@ function _createAbsoluteAmountsDiv(placeholder) {
     taxInclusiveAmountItem = document.createElement("input");
     taxInclusiveAmountItem.classList.add("form-control");
     taxInclusiveAmountItem.setAttribute("type", "number");
-    taxInclusiveAmountItem.setAttribute("placeholder", "0.00");
+    taxInclusiveAmountItem.setAttribute("value", "0.00");
     taxInclusiveAmountItem.id = "taxInclusiveAmount";
 
     formGroupRight.appendChild(taxInclusiveAmountLabel);
@@ -146,7 +146,7 @@ function _fillTotalAmountDiv(div) {
     taxInclusiveAmountItem = document.createElement("input");
     taxInclusiveAmountItem.classList.add("form-control");
     taxInclusiveAmountItem.setAttribute("type", "number");
-    taxInclusiveAmountItem.setAttribute("placeholder", "0.00");
+    taxInclusiveAmountItem.setAttribute("value", "0.00");
     taxInclusiveAmountItem.id = "taxInclusiveAmountItem1";
 
     div.appendChild(taxInclusiveAmountLabel);
