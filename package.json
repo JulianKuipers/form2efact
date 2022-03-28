@@ -1,0 +1,37 @@
+{
+  "name": "form2efact",
+  "version": "1.0.0",
+  "description": "e-Invoice generator for Dutch standards like NLCIUS and UBL-OHNL",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "css:autoprefixer": "postcss -u autoprefixer -r dist/*.css",
+    "css:scss": "node-sass --output-style compressed -o dist src/scss",
+    "css:lint": "stylelint src/scss/*.scss --custom-syntax postcss-scss",
+    "build:css": "npm run css:lint && npm run css:scss && npm run css:autoprefixer",
+    "build:indexhtml": "posthtml -c config/posthtml-index.json",
+    "build:docshtml": "posthtml -c config/posthtml-docs.json",
+    "build": "run-s build:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JulianKuipers/form2efact.git"
+  },
+  "author": "Julian Kuipers",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/JulianKuipers/form2efact/issues"
+  },
+  "homepage": "https://github.com/JulianKuipers/form2efact#readme",
+  "devDependencies" : {
+    "posthtml-cli": "^0.10.0",
+    "postcss-cli": "^9.1.0",
+    "npm-run-all": "^4.1.5",
+    "autoprefixer": "^10.4.4",
+    "eslint": "^8.11.0",
+    "imagemin-cli": "^7.0.0",
+    "node-sass": "^7.0.1",
+    "onchange": "^7.1.0",
+    "postcss-scss": "^4.0.3"
+  }
+}

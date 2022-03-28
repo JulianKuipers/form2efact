@@ -1,0 +1,6 @@
+{
+    "root": "src",
+    "input": "*.html",
+    "output": "dist"
+  }
+  
