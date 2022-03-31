@@ -11,6 +11,7 @@
     "build:css": "npm run css:lint && npm run css:scss && npm run css:autoprefixer",
     "build:indexhtml": "posthtml -c config/posthtml-index.json",
     "build:docshtml": "posthtml -c config/posthtml-docs.json",
+    "build:images": "imagemin src/images/**/* --out-dir=dist/images",
     "build": "run-s build:*"
   },
   "repository": {
@@ -23,15 +24,19 @@
     "url": "https://github.com/JulianKuipers/form2efact/issues"
   },
   "homepage": "https://github.com/JulianKuipers/form2efact#readme",
-  "devDependencies" : {
-    "posthtml-cli": "^0.10.0",
-    "postcss-cli": "^9.1.0",
-    "npm-run-all": "^4.1.5",
+  "devDependencies": {
     "autoprefixer": "^10.4.4",
     "eslint": "^8.11.0",
     "imagemin-cli": "^7.0.0",
     "node-sass": "^7.0.1",
+    "npm-run-all": "^4.1.5",
     "onchange": "^7.1.0",
-    "postcss-scss": "^4.0.3"
+    "postcss-cli": "^9.1.0",
+    "postcss-scss": "^4.0.3",
+    "posthtml-cli": "^0.10.0"
+  },
+  "dependencies": {
+    "imagemin": "^8.0.1",
+    "stylelint": "^14.6.1"
   }
 }
