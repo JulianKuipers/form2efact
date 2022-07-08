@@ -7,8 +7,8 @@ function getXML() {
     invCount = document.getElementById("invoiceCount").value
     id = poNum + invCount;
 
-    issueDate = formatDate(new Date());
-    dueDate = formatDate(addDays(new Date(), 30))
+    issueDate = Formatter.formatDate(new Date());
+    dueDate = Formatter.formatDate(addDays(new Date(), 30))
     delivDate = issueDate;
 
     note = `Testfactuur ${poNum} ${invCount}`;
@@ -21,7 +21,7 @@ function getXML() {
     autoCalc = document.getElementById("autoCalcBox").checked;
     var isIncludingTax = document.getElementById("taxIncludedBox").checked;
 
-    var taxPercentage = formatCurrency(document.getElementById("taxPercentage").value);
+    var taxPercentage = Formatter.formatCurrency(document.getElementById("taxPercentage").value);
 
     count = document.getElementById("count").value;
     invoiceLines = createInvLines(count, autoCalc, taxPercentage, isIncludingTax);
@@ -32,13 +32,13 @@ function getXML() {
     if (autoCalc) {
         linesArray = invoiceLines.lineTotalsExcludingTax;
         header = autoCalculateHeader(linesArray, taxPercentage, isIncludingTax);
-        taxAmount = formatCurrency(header.taxAmount);
-        taxableAmount = formatCurrency(header.taxableAmount);
-        taxInclusiveAmount = formatCurrency(header.taxInclusiveAmount);
+        taxAmount = Formatter.formatCurrency(header.taxAmount);
+        taxableAmount = Formatter.formatCurrency(header.taxableAmount);
+        taxInclusiveAmount = Formatter.formatCurrency(header.taxInclusiveAmount);
     } else {
-        taxAmount = formatCurrency(document.getElementById("taxAmount").value);
-        taxableAmount = formatCurrency(document.getElementById("taxableAmount").value);
-        taxInclusiveAmount = formatCurrency(document.getElementById("taxInclusiveAmount").value);
+        taxAmount = Formatter.formatCurrency(document.getElementById("taxAmount").value);
+        taxableAmount = Formatter.formatCurrency(document.getElementById("taxableAmount").value);
+        taxInclusiveAmount = Formatter.formatCurrency(document.getElementById("taxInclusiveAmount").value);
     }
     
     if (standaard === "NLCIUS") {
@@ -383,9 +383,9 @@ function createInvLines(max, autoCalc, taxPercentage, isIncludingTax) {
         var name, quantity, price, cost, lineObj, priceAmount;
         name = sanitizer.sanitize(document.getElementById(`nameItem${i}`).value);
         quantity = document.getElementById(`quantityItem${i}`).value;
-        price = formatCurrency(document.getElementById(`priceItem${i}`).value);
+        price = Formatter.formatCurrency(document.getElementById(`priceItem${i}`).value);
         if (autoCalc) {
-            cost = formatCurrency(autoCalculateLine(isIncludingTax, quantity, price, taxPercentage));
+            cost = Formatter.formatCurrency(autoCalculateLine(isIncludingTax, quantity, price, taxPercentage));
             lineObj = {
                 lineID: i,
                 price : price,
@@ -394,7 +394,7 @@ function createInvLines(max, autoCalc, taxPercentage, isIncludingTax) {
             };
             lineTotalsArray.push(lineObj)
         } else {
-            cost = formatCurrency(document.getElementById(`taxInclusiveAmountItem${i}`).value); 
+            cost = Formatter.formatCurrency(document.getElementById(`taxInclusiveAmountItem${i}`).value); 
         }
 
         var lid;
@@ -410,7 +410,7 @@ function createInvLines(max, autoCalc, taxPercentage, isIncludingTax) {
             lid = `-1`;
         }
 
-        priceAmount = formatCurrency(isIncludingTax ? roundTwoDecimals(price / getTaxRatio(taxPercentage)): price);
+        priceAmount = Formatter.formatCurrency(isIncludingTax ? roundTwoDecimals(price / getTaxRatio(taxPercentage)): price);
 
         if (standaard === "NLCIUS") {
             xml += 
@@ -454,7 +454,7 @@ function createInvLines(max, autoCalc, taxPercentage, isIncludingTax) {
                     </cac:OrderReference>
                 </cac:OrderLineReference>
                 <cac:Delivery>
-                    <cbc:ActualDeliveryDate>${formatDate(new Date())}</cbc:ActualDeliveryDate>
+                    <cbc:ActualDeliveryDate>${Formatter.formatDate(new Date())}</cbc:ActualDeliveryDate>
                 </cac:Delivery>
                 <cac:TaxTotal>
                     <cbc:TaxAmount currencyID="EUR">${cost * (taxPercentage / 100)}</cbc:TaxAmount>

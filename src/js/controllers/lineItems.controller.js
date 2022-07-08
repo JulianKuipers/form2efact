@@ -83,8 +83,8 @@ function changeLineItems() {
     }
     priceItem = document.createElement("input");
     priceItem.classList.add("form-control");
-    priceItem.setAttribute("type", "text");
-    priceItem.setAttribute("value", "0,00");
+    priceItem.setAttribute("type", "number");
+    priceItem.setAttribute("value", "0.00");
     priceItem.id = `priceItem${index}`;
 
     if (!autoCalcBox.checked) {
@@ -94,8 +94,8 @@ function changeLineItems() {
       taxInclusiveAmountLabel.innerHTML = "Totaal bedrag exclusief BTW van dit item";
       taxInclusiveAmountItem = document.createElement("input");
       taxInclusiveAmountItem.classList.add("form-control");
-      taxInclusiveAmountItem.setAttribute("type", "text");
-      taxInclusiveAmountItem.setAttribute("value", "0,00");
+      taxInclusiveAmountItem.setAttribute("type", "number");
+      taxInclusiveAmountItem.setAttribute("value", "0.00");
       taxInclusiveAmountItem.id = `taxInclusiveAmountItem${index}`;
 
       formGroupRight.appendChild(taxInclusiveAmountLabel);
