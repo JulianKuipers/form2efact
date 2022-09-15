@@ -1,6 +1,6 @@
 # E-Factuur XML Generator
 
-#### Work In Progress
+#### Work In Progress...
 
 Deze tool is gemaakt om testfacturen te genereren voor e-facturatie. De facturen zijn gebaseerd op de NLCIUS of UBL-OHNL standaard.
 
