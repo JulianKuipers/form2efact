@@ -54,13 +54,17 @@ function changeLineItems() {
     formGroupLeft.classList.add("form-group");
     formGroupLeft.classList.add("col-md-2");
 
-    var formGroupCentre = document.createElement("div");
-    formGroupCentre.classList.add("form-group");
-    formGroupCentre.classList.add("col-md-5");
+    var formGroupCentreLeft = document.createElement("div");
+    formGroupCentreLeft.classList.add("form-group");
+    formGroupCentreLeft.classList.add("col-md-3");
+
+    var formGroupCentreRight = document.createElement("div");
+    formGroupCentreRight.classList.add("form-group");
+    formGroupCentreRight.classList.add("col-md-3");
 
     var formGroupRight = document.createElement("div");
     formGroupRight.classList.add("form-group");
-    formGroupRight.classList.add("col-md-5");
+    formGroupRight.classList.add("col-md-4");
 
     var quantityItem, quantityLabel;
     quantityLabel = document.createElement("label");
@@ -87,11 +91,22 @@ function changeLineItems() {
     priceItem.setAttribute("value", "0,00");
     priceItem.id = `priceItem${index}`;
 
+    let taxPercentageItem, taxPercentageLabel;
+    taxPercentageLabel = document.createElement("label");
+    taxPercentageLabel.setAttribute("for", `taxPercentageItem${index}`);
+    taxPercentageLabel.innerHTML = "Percentage belasting item";
+    taxPercentageItem = document.createElement("input");
+    taxPercentageItem.classList.add("form-control");
+    taxPercentageItem.setAttribute("type", "number");
+    taxPercentageItem.setAttribute("min", 0);
+    taxPercentageItem.setAttribute("value", "");
+    taxPercentageItem.id = `taxPercentageItem${index}`;
+
     if (!autoCalcBox.checked) {
       var taxInclusiveAmountItem, taxInclusiveAmountLabel;
       taxInclusiveAmountLabel = document.createElement("label");
       taxInclusiveAmountLabel.setAttribute("for", `taxInclusiveAmountItem${index}`);
-      taxInclusiveAmountLabel.innerHTML = "Totaal bedrag exclusief BTW van dit item";
+      taxInclusiveAmountLabel.innerHTML = "Totaal itembedrag excl. BTW";
       taxInclusiveAmountItem = document.createElement("input");
       taxInclusiveAmountItem.classList.add("form-control");
       taxInclusiveAmountItem.setAttribute("type", "text");
@@ -105,11 +120,15 @@ function changeLineItems() {
     formGroupLeft.appendChild(quantityLabel);
     formGroupLeft.appendChild(quantityItem);
 
-    formGroupCentre.appendChild(priceLabel);
-    formGroupCentre.appendChild(priceItem);
+    formGroupCentreLeft.appendChild(priceLabel);
+    formGroupCentreLeft.appendChild(priceItem);
+
+    formGroupCentreRight.appendChild(taxPercentageLabel);
+    formGroupCentreRight.appendChild(taxPercentageItem);
 
     bottomFormRow.appendChild(formGroupLeft);
-    bottomFormRow.appendChild(formGroupCentre);
+    bottomFormRow.appendChild(formGroupCentreLeft);
+    bottomFormRow.appendChild(formGroupCentreRight);
     bottomFormRow.appendChild(formGroupRight);
 
     // Append all to child
@@ -119,7 +138,24 @@ function changeLineItems() {
 
     el.appendChild(child);
   }
+
+  setDefTaxRate();
+
 }
+
+function setDefTaxRate() {
+  const count = document.getElementById("count").value;
+  const taxDefaultPercentage = document.getElementById("taxPercentageDefault").value;
+
+  for (var i = 1; i <= count; i++) {
+    const element = document.getElementById(`taxPercentageItem${i}`);
+    if (element.value === "" && taxDefaultPercentage !== "") {
+      element.value = taxDefaultPercentage;
+    }
+  }
+}
+
+
 
 function _initialize(element) {
   var label = element.lastElementChild.children[1].firstElementChild;

@@ -9,6 +9,9 @@ function initialize() {
     var itemCount = document.getElementById("count");
     itemCount.addEventListener('change', changeLineItems);
 
+    var taxPercentageDef = document.getElementById("taxPercentageDefault");
+    taxPercentageDef.addEventListener('change', setDefTaxRate);
+
     changeForm();
 }
 
@@ -66,11 +69,11 @@ function _createTaxDiv(placeholder) {
     div.classList.add("form-group");
     div.classList.add("col-md-6");
 
-    label.setAttribute("for", "taxPercentage");
+    label.setAttribute("for", "taxPercentageDefault");
     label.innerHTML = "Percentage belasting";
 
     input.classList.add("form-control");
-    input.id = "taxPercentage";
+    input.id = "taxPercentageDefault";
     input.setAttribute("type", "number");
     input.setAttribute("value", "0.00");
     input.setAttribute("min", "0.00");
@@ -142,7 +145,7 @@ function _fillTotalAmountDiv(div) {
     var taxInclusiveAmountItem, taxInclusiveAmountLabel;
     taxInclusiveAmountLabel = document.createElement("label");
     taxInclusiveAmountLabel.setAttribute("for", "taxInclusiveAmountItem1");
-    taxInclusiveAmountLabel.innerHTML = "Totaal bedrag exclusief belasting van dit item";
+    taxInclusiveAmountLabel.innerHTML = "Totaal itembedrag excl. BTW";
     taxInclusiveAmountItem = document.createElement("input");
     taxInclusiveAmountItem.classList.add("form-control");
     taxInclusiveAmountItem.setAttribute("type", "number");

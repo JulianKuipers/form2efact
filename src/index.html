@@ -72,8 +72,8 @@
             <div class="form-group col-md-4">
               <label for="standaard">Factuurstandaard</label>
               <select type="text" class="form-control" id="standaard">
-                <option>UBL-OHNL</option>
                 <option>NLCIUS</option>
+                <option>UBL-OHNL</option>
               </select>
             </div>
             <div class="col-md-8">
@@ -128,8 +128,8 @@
 
           <div class="form-row" id="taxDiv">
             <div class="form-group col-md-6">
-              <label for="taxPercentage">Percentage belasting</label>
-              <input type="number" class="form-control" id="taxPercentage" placeholder="0" min="0" value="0">
+              <label for="taxPercentageDefault">Percentage belasting</label>
+              <input type="number" class="form-control" id="taxPercentageDefault" min="0" value="">
             </div>
           </div>
 
@@ -159,11 +159,16 @@
                   <input type="number" class="form-control" id="quantityItem1" min="1" value="1" aria-describedby="quantityHelp">
                   <small id="quantityHelp" class="form-text text-muted">Aantal items</small>
                 </div>
-                <div class="form-group col-md-5">
+                <div class="form-group col-md-3">
                   <label for="priceItem1">Stuksprijs exclusief belasting</label>
                   <input type="number" class="form-control" id="priceItem1" value="0.00">
                 </div>
-                <div class="form-group col-md-5" id="totalAmountDiv1"></div>
+                <div class="form-group col-md-3">
+                  <label for="taxPercentageItem1">Percentage belasting item</label>
+                  <input type="number" class="form-control" id="taxPercentageItem1" min="0" value="">
+                  <small id="quantityHelp" class="form-text text-muted">% voor dit item</small>
+                </div>
+                <div class="form-group col-md-4" id="totalAmountDiv1"></div>
               </div>
             </div>
           </div>

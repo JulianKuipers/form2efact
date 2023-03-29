@@ -21,17 +21,17 @@ function getXML() {
     autoCalc = document.getElementById("autoCalcBox").checked;
     var isIncludingTax = document.getElementById("taxIncludedBox").checked;
 
-    var taxPercentage = formatCurrency(document.getElementById("taxPercentage").value);
+    var taxPercentageDefault = formatCurrency(document.getElementById("taxPercentageDefault").value);
 
     count = document.getElementById("count").value;
-    invoiceLines = createInvLines(count, autoCalc, taxPercentage, isIncludingTax);
+    invoiceLines = createInvLines(count, autoCalc, isIncludingTax);
     invoicelinesXML = invoiceLines.xml;
 
     const standaard = document.getElementById("standaard").value;
 
     if (autoCalc) {
         linesArray = invoiceLines.lineTotalsExcludingTax;
-        header = autoCalculateHeader(linesArray, taxPercentage, isIncludingTax);
+        header = autoCalculateHeader(linesArray, taxPercentageDefault, isIncludingTax);
         taxAmount = formatCurrency(header.taxAmount);
         taxableAmount = formatCurrency(header.taxableAmount);
         taxInclusiveAmount = formatCurrency(header.taxInclusiveAmount);
@@ -136,7 +136,7 @@ function getXML() {
                     <cbc:TaxAmount currencyID="EUR">${taxAmount}</cbc:TaxAmount>
                     <cac:TaxCategory>
                         <cbc:ID>S</cbc:ID>
-                        <cbc:Percent>${taxPercentage}</cbc:Percent>
+                        <cbc:Percent>${taxPercentageDefault}</cbc:Percent>
                         <cac:TaxScheme>
                             <cbc:ID>VAT</cbc:ID>
                         </cac:TaxScheme>
@@ -352,7 +352,7 @@ function getXML() {
                 <cac:TaxSubtotal>
                     <cbc:TaxableAmount currencyID="EUR">${taxableAmount}</cbc:TaxableAmount>
                     <cbc:TaxAmount currencyID="EUR">${taxAmount}</cbc:TaxAmount>
-                    <cbc:Percent>${taxPercentage}</cbc:Percent>
+                    <cbc:Percent>${taxPercentageDefault}</cbc:Percent>
                     <cac:TaxCategory>
                         <cac:TaxScheme>
                             <cbc:Name>BTW</cbc:Name>
@@ -373,17 +373,18 @@ function getXML() {
     return xml;
 }
 
-function createInvLines(max, autoCalc, taxPercentage, isIncludingTax) {
+function createInvLines(max, autoCalc, isIncludingTax) {
     const sanitizer = new Sanitizer("text");
     const standaard = document.getElementById("standaard").value;
     var xml = ``;
     var i = 1;
     var lineTotalsArray = [];
     while (i <= max) {
-        var name, quantity, price, cost, lineObj, priceAmount;
+        var name, quantity, price, cost, lineObj, priceAmount, taxPercentage;
         name = sanitizer.sanitize(document.getElementById(`nameItem${i}`).value);
         quantity = document.getElementById(`quantityItem${i}`).value;
         price = formatCurrency(document.getElementById(`priceItem${i}`).value);
+        taxPercentage = document.getElementById(`taxPercentageItem${i}`).value;
         if (autoCalc) {
             cost = formatCurrency(autoCalculateLine(isIncludingTax, quantity, price, taxPercentage));
             lineObj = {
