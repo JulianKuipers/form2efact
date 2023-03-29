@@ -1,6 +1,6 @@
 // Public functions
 
-function autoCalculateHeader(linesArray, taxPercentage, isIncludingTax) {
+function autoCalculateHeader(linesArray, isIncludingTax) {
     var returnObj = {
         taxAmount : 0.00,
         taxableAmount : 0.00,
@@ -10,14 +10,12 @@ function autoCalculateHeader(linesArray, taxPercentage, isIncludingTax) {
 
     linesArray.forEach(function (line) {
         var includingTax, excludingTax;
-        includingTax = _calculateLineTotalIncludingTax(isIncludingTax, line.quantity, line.price, taxPercentage);
-        excludingTax = _calculateLineTotalExcludingTax(isIncludingTax, line.quantity, line.price, taxPercentage);
+        includingTax = _calculateLineTotalIncludingTax(isIncludingTax, line.quantity, line.price, line.taxRate);
+        excludingTax = _calculateLineTotalExcludingTax(isIncludingTax, line.quantity, line.price, line.taxRate);
         returnObj.taxInclusiveAmount += includingTax;
+        returnObj.taxableAmount += excludingTax;
     });
 
-    // Calculate taxes
-    returnObj.taxableAmount = (returnObj.taxInclusiveAmount / (1 + (taxPercentage / 100)));
-    
     // Hard rounding
     returnObj.taxableAmount = Math.round(returnObj.taxableAmount * 100) / 100;
     returnObj.taxInclusiveAmount = Math.round(returnObj.taxInclusiveAmount * 100) / 100;

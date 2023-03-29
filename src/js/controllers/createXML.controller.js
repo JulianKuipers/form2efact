@@ -31,7 +31,7 @@ function getXML() {
 
     if (autoCalc) {
         linesArray = invoiceLines.lineTotalsExcludingTax;
-        header = autoCalculateHeader(linesArray, taxPercentageDefault, isIncludingTax);
+        header = autoCalculateHeader(linesArray, isIncludingTax);
         taxAmount = formatCurrency(header.taxAmount);
         taxableAmount = formatCurrency(header.taxableAmount);
         taxInclusiveAmount = formatCurrency(header.taxInclusiveAmount);
@@ -391,6 +391,7 @@ function createInvLines(max, autoCalc, isIncludingTax) {
                 lineID: i,
                 price : price,
                 quantity : quantity,
+                taxRate : taxPercentage,
                 lineTotalExcludingTax: cost
             };
             lineTotalsArray.push(lineObj)
