@@ -458,10 +458,10 @@ function createInvLines(max, autoCalc, isIncludingTax) {
                     <cbc:ActualDeliveryDate>${formatDate(new Date())}</cbc:ActualDeliveryDate>
                 </cac:Delivery>
                 <cac:TaxTotal>
-                    <cbc:TaxAmount currencyID="EUR">${cost * (taxPercentage / 100)}</cbc:TaxAmount>
+                    <cbc:TaxAmount currencyID="EUR">${formatCurrency(cost * (taxPercentage / 100))}</cbc:TaxAmount>
                     <cac:TaxSubtotal>
                         <cbc:TaxableAmount currencyID="EUR">${cost}</cbc:TaxableAmount>
-                        <cbc:TaxAmount currencyID="EUR">${cost * (taxPercentage / 100)}</cbc:TaxAmount>
+                        <cbc:TaxAmount currencyID="EUR">${formatCurrency(cost * (taxPercentage / 100))}</cbc:TaxAmount>
                         <cac:TaxCategory>
                             <cbc:Percent>${taxPercentage}</cbc:Percent>
                             <cac:TaxScheme>
