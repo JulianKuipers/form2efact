@@ -87,7 +87,7 @@ function changeLineItems() {
     }
     priceItem = document.createElement("input");
     priceItem.classList.add("form-control");
-    priceItem.setAttribute("type", "text");
+    priceItem.setAttribute("type", "number");
     priceItem.setAttribute("value", "0,00");
     priceItem.id = `priceItem${index}`;
 
